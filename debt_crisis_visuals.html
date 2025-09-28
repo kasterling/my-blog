@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debt Crisis Visual Aids</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        .chart-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .chart-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .chart-subtitle {
+            font-size: 16px;
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+            margin: 20px 0;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .comparison-item {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .big-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #e74c3c;
+        }
+        
+        .big-number.positive {
+            color: #27ae60;
+        }
+        
+        .label {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        .insight-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .insight-title {
+            font-weight: 700;
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Chart 1: Government Spending vs Revenue -->
+    <div class="chart-container">
+        <div class="chart-title">The $2 Trillion Problem</div>
+        <div class="chart-subtitle">Annual Government Spending vs Tax Revenue (2025 Projected)</div>
+        <div class="chart-wrapper">
+            <canvas id="spendingChart"></canvas>
+        </div>
+        <div class="insight-box">
+            <div class="insight-title">💡 Key Insight:</div>
+            The government spends $7 trillion but only collects $5 trillion in taxes. That $2 trillion gap gets added to our national debt every single year.
+        </div>
+    </div>
+
+    <!-- Chart 2: Gold Valuation Comparison -->
+    <div class="chart-container">
+        <div class="chart-title">The Hidden Gold Treasure</div>
+        <div class="chart-subtitle">Government Gold Value: Book Price vs Market Price</div>
+        
+        <div class="comparison-grid">
+            <div class="comparison-item">
+                <div class="big-number">$11B</div>
+                <div class="label">Current Book Value<br>($42.22/oz since 1973)</div>
+            </div>
+            <div class="comparison-item">
+                <div class="big-number positive">$688B</div>
+                <div class="label">Market Value Today<br>($2,633/oz)</div>
+            </div>
+        </div>
+        
+        <div class="chart-wrapper">
+            <canvas id="goldChart"></canvas>
+        </div>
+        
+        <div class="insight-box">
+            <div class="insight-title">💡 Key Insight:</div>
+            The government could "find" $677 billion just by updating 50-year-old accounting. That's enough to fund the government for about 5 weeks!
+        </div>
+    </div>
+
+    <!-- Chart 3: Asset Price Floors Concept -->
+    <div class="chart-container">
+        <div class="chart-title">Government Price Floor Effect</div>
+        <div class="chart-subtitle">How Government Ownership Creates Asset Support</div>
+        <div class="chart-wrapper">
+            <canvas id="priceFloorChart"></canvas>
+        </div>
+        <div class="insight-box">
+            <div class="insight-title">💡 Key Insight:</div>
+            When governments hold assets as strategic reserves, they have strong incentives to support prices. This creates an implicit "floor" that didn't exist before.
+        </div>
+    </div>
+
+    <!-- Chart 4: Stablecoin Growth and Treasury Demand -->
+    <div class="chart-container">
+        <div class="chart-title">Stablecoin Market Explosion</div>
+        <div class="chart-subtitle">Market Cap Growth and Projected Treasury Demand</div>
+        <div class="chart-wrapper">
+            <canvas id="stablecoinChart"></canvas>
+        </div>
+        <div class="insight-box">
+            <div class="insight-title">💡 Key Insight:</div>
+            Every dollar of regulated stablecoin creates demand for US dollars or Treasury bonds. As this market grows to $2 trillion, it becomes a massive source of government financing.
+        </div>
+    </div>
+
+    <!-- Chart 5: Risk vs Reward Timeline -->
+    <div class="chart-container">
+        <div class="chart-title">Implementation Timeline & Risk Assessment</div>
+        <div class="chart-subtitle">What Could Go Right vs What Could Go Wrong</div>
+        <div class="chart-wrapper">
+            <canvas id="timelineChart"></canvas>
+        </div>
+        <div class="insight-box">
+            <div class="insight-title">⚠️ Reality Check:</div>
+            This plan has huge potential upside, but the risks are equally significant. The next 2-3 years will determine whether this is brilliant or dangerous.
+        </div>
+    </div>
+
+    <script>
+        // Chart 1: Spending vs Revenue
+        const ctx1 = document.getElementById('spendingChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['Tax Revenue', 'Government Spending', 'Debt Gap'],
+                datasets: [{
+                    label: 'Trillions of Dollars',
+                    data: [5, 7, 2],
+                    backgroundColor: ['#27ae60', '#e74c3c', '#f39c12'],
+                    borderColor: ['#229954', '#c0392b', '#d68910'],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Trillions ($)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 2: Gold Valuation
+        const ctx2 = document.getElementById('goldChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: ['Current Book Value ($11B)', 'Hidden Value ($677B)'],
+                datasets: [{
+                    data: [11, 677],
+                    backgroundColor: ['#e74c3c', '#f1c40f'],
+                    borderColor: ['#c0392b', '#d4ac0d'],
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Chart 3: Price Floor Effect
+        const ctx3 = document.getElementById('priceFloorChart').getContext('2d');
+        new Chart(ctx3, {
+            type: 'line',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028'],
+                datasets: [
+                    {
+                        label: 'Without Government Support',
+                        data: [50, 65, 40, 30, 45, 35, 25, 30, 40],
+                        borderColor: '#e74c3c',
+                        backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                        tension: 0.4,
+                        borderDash: [5, 5]
+                    },
+                    {
+                        label: 'With Government Price Floor',
+                        data: [50, 65, 60, 70, 75, 80, 85, 90, 95],
+                        borderColor: '#27ae60',
+                        backgroundColor: 'rgba(39, 174, 96, 0.1)',
+                        tension: 0.4,
+                        borderWidth: 3
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Asset Price (Relative)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    }
+                }
+            }
+        });
+
+        // Chart 4: Stablecoin Growth
+        const ctx4 = document.getElementById('stablecoinChart').getContext('2d');
+        new Chart(ctx4, {
+            type: 'line',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028'],
+                datasets: [
+                    {
+                        label: 'Stablecoin Market Cap ($B)',
+                        data: [20, 50, 150, 120, 160, 250, 500, 1200, 2000],
+                        borderColor: '#3498db',
+                        backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                        yAxisID: 'y',
+                        tension: 0.4,
+                        borderWidth: 3
+                    },
+                    {
+                        label: 'Treasury Demand ($B)',
+                        data: [20, 50, 150, 120, 160, 250, 500, 1200, 2000],
+                        borderColor: '#9b59b6',
+                        backgroundColor: 'rgba(155, 89, 182, 0.1)',
+                        yAxisID: 'y',
+                        tension: 0.4,
+                        borderWidth: 2,
+                        borderDash: [5, 5]
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        title: {
+                            display: true,
+                            text: 'Billions ($)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 5: Timeline and Risk Assessment
+        const ctx5 = document.getElementById('timelineChart').getContext('2d');
+        new Chart(ctx5, {
+            type: 'scatter',
+            data: {
+                datasets: [
+                    {
+                        label: 'Success Scenario',
+                        data: [
+                            {x: 0.5, y: 20},
+                            {x: 1, y: 40},
+                            {x: 2, y: 70},
+                            {x: 3, y: 85}
+                        ],
+                        backgroundColor: '#27ae60',
+                        borderColor: '#27ae60',
+                        pointRadius: 8
+                    },
+                    {
+                        label: 'Failure Scenario',
+                        data: [
+                            {x: 0.5, y: -10},
+                            {x: 1, y: -25},
+                            {x: 2, y: -50},
+                            {x: 3, y: -70}
+                        ],
+                        backgroundColor: '#e74c3c',
+                        borderColor: '#e74c3c',
+                        pointRadius: 8
+                    },
+                    {
+                        label: 'Most Likely Path',
+                        data: [
+                            {x: 0.5, y: 5},
+                            {x: 1, y: 15},
+                            {x: 2, y: 30},
+                            {x: 3, y: 45}
+                        ],
+                        backgroundColor: '#f39c12',
+                        borderColor: '#f39c12',
+                        pointRadius: 10,
+                        showLine: true,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Years from Now'
+                        },
+                        min: 0,
+                        max: 4
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Impact on Family Wealth (%)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
