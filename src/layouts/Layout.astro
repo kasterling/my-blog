@@ -1,0 +1,174 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Strategic Frameworks for Building Wealth and Influence" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} | The Sterling Perspective</title>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav-container">
+        <a href="/my-blog/" class="logo">
+          <h1>The Sterling Perspective</h1>
+          <p>Strategic Frameworks for Building Wealth and Influence</p>
+        </a>
+        <div class="nav-links">
+          <a href="/my-blog/category/real-estate">Real Estate</a>
+          <a href="/my-blog/category/finance">Finance</a>
+          <a href="/my-blog/category/trading">Trading</a>
+          <a href="/my-blog/category/technology">Technology</a>
+          <a href="/my-blog/category/ai">AI</a>
+          <a href="/my-blog/category/personal-growth">Personal Growth</a>
+        </div>
+      </nav>
+    </header>
+    
+    <main>
+      <slot />
+    </main>
+    
+    <footer class="site-footer">
+      <div class="footer-content">
+        <p>&copy; 2024 Keith Sterling. Strategic frameworks for building wealth and influence.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: #ffffff;
+    color: #333333;
+    line-height: 1.6;
+  }
+
+  .site-header {
+    background: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .logo {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .logo h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 0.25rem;
+  }
+
+  .logo p {
+    font-size: 0.875rem;
+    color: #666;
+    font-weight: 500;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: #666;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links a:hover {
+    color: #0066cc;
+  }
+
+  main {
+    min-height: calc(100vh - 200px);
+    padding: 2rem 0;
+  }
+
+  .site-footer {
+    background: #f8f9fa;
+    border-top: 1px solid #e0e0e0;
+    padding: 2rem 0;
+    margin-top: 4rem;
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    text-align: center;
+    color: #666;
+    font-size: 0.875rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .nav-container {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+    }
+
+    .nav-links {
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .nav-links a {
+      font-size: 0.8rem;
+    }
+  }
+</style>

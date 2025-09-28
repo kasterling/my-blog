@@ -1,0 +1,210 @@
+---
+import Layout from './Layout.astro';
+import { getEntry } from 'astro:content';
+
+export interface Props {
+  frontmatter: {
+    title: string;
+    description: string;
+    pubDate: string;
+    tags?: string[];
+    image?: string;
+    mood?: string;
+    perspective?: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter.title} description={frontmatter.description}>
+  <article class="blog-post">
+    <header class="post-header">
+      {frontmatter.mood && (
+        <div class="mood-indicator">
+          <span class="mood">{frontmatter.mood}</span>
+        </div>
+      )}
+      {frontmatter.perspective && (
+        <div class="perspective-indicator">
+          <span class="perspective">Exploring: {frontmatter.perspective}</span>
+        </div>
+      )}
+      <h1 class="post-title">{frontmatter.title}</h1>
+      <p class="post-description">{frontmatter.description}</p>
+      <div class="post-meta">
+        <time datetime={frontmatter.pubDate}>
+          {new Date(frontmatter.pubDate).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })}
+        </time>
+        {frontmatter.tags && (
+          <div class="tags">
+            {frontmatter.tags.map(tag => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+    </header>
+    
+    {frontmatter.image && (
+      <div class="hero-image">
+        <img src={frontmatter.image} alt={frontmatter.title} />
+      </div>
+    )}
+    
+    <div class="post-content">
+      <slot />
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .blog-post {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .post-header {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .mood-indicator, .perspective-indicator {
+    margin-bottom: 0.5rem;
+  }
+
+  .mood {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  .perspective {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  .post-title {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+  }
+
+  .post-description {
+    font-size: 1.25rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .post-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    font-size: 0.875rem;
+    color: #888;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    background: #f0f0f0;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+  }
+
+  .hero-image {
+    margin: 2rem 0;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .post-content {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #333;
+  }
+
+  .post-content :global(h2) {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 3rem 0 1.5rem;
+    color: #1a1a1a;
+  }
+
+  .post-content :global(h3) {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 2.5rem 0 1rem;
+    color: #1a1a1a;
+  }
+
+  .post-content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .post-content :global(img) {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 2rem 0;
+  }
+
+  .post-content :global(blockquote) {
+    border-left: 4px solid #0066cc;
+    padding-left: 2rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: #555;
+  }
+
+  .post-content :global(ul, ol) {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+  }
+
+  .post-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .blog-post {
+      padding: 1rem;
+    }
+
+    .post-title {
+      font-size: 2rem;
+    }
+
+    .post-meta {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+</style>
