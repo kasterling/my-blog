@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
+const base = import.meta.env.BASE_URL;
+
 const allPosts = await getCollection('blog', ({ data }) => {
   return !data.draft;
 });
@@ -26,13 +28,18 @@ const recentPerspectives = [...new Set(
 <Layout title="The Sterling Perspective" description="Examining perspectives against perceptions - exploring ideas as they evolve">
   <div class="home-container">
     <section class="hero">
+      <div class="hero-visual">
+        <img src={`${base}images/blog-header.png`} alt="The Sterling Perspective" class="hero-image" />
+      </div>
       <div class="hero-content">
         <h1 class="hero-title">The Sterling Perspective</h1>
         <p class="hero-subtitle">Examining perspectives against perceptions</p>
         <p class="hero-description">
-          A space for exploring ideas as they evolve, testing viewpoints against experience, 
-          and sharing the ongoing conversation between what I think and what I observe.
+          I think out loud here—putting thoughts in writing to better see how I actually think versus how I think I think. You'll find explorations across economics, psychology, technology, relationships, and wherever curiosity leads, with genuine connections emerging between different domains.
         </p>
+        <div class="value-proposition">
+          <p><strong>Think of this as listening in on someone examining their own perspectives in real-time.</strong></p>
+        </div>
       </div>
     </section>
 
@@ -59,7 +66,7 @@ const recentPerspectives = [...new Set(
                 )}
                 <time>{new Date(post.data.pubDate).toLocaleDateString()}</time>
               </div>
-              <h3><a href={`/my-blog/blog/${post.slug}`}>{post.data.title}</a></h3>
+              <h3><a href={`${base}blog/${post.slug}`}>{post.data.title}</a></h3>
               <p>{post.data.description}</p>
               {post.data.perspective && (
                 <div class="perspective-preview">
@@ -112,6 +119,19 @@ const recentPerspectives = [...new Set(
     border-radius: 0 0 2rem 2rem;
   }
 
+  .hero-visual {
+    margin-bottom: 3rem;
+  }
+
+  .hero-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 300px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    object-fit: cover;
+  }
+
   .hero-content {
     max-width: 800px;
     margin: 0 auto;
@@ -138,8 +158,25 @@ const recentPerspectives = [...new Set(
     font-size: 1.125rem;
     color: #666;
     line-height: 1.7;
-    max-width: 600px;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+  }
+
+  .value-proposition {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
     margin: 0 auto;
+    max-width: 600px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  }
+
+  .value-proposition p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: center;
   }
 
   .perspectives {
@@ -326,6 +363,10 @@ const recentPerspectives = [...new Set(
   }
 
   @media (max-width: 768px) {
+    .hero-image {
+      max-height: 200px;
+    }
+
     .hero-title {
       font-size: 2.5rem;
     }
