@@ -1,0 +1,21 @@
+#!/bin/sh
+
+echo "🔍 Running blog post validation..."
+
+# Run the validation script
+node scripts/validate-posts.js
+
+# Get the exit code
+VALIDATION_EXIT_CODE=$?
+
+if [ $VALIDATION_EXIT_CODE -ne 0 ]; then
+    echo ""
+    echo "❌ Blog post validation failed!"
+    echo "Please fix the errors above before committing."
+    echo ""
+    echo "💡 To bypass validation (not recommended): git commit --no-verify"
+    exit 1
+fi
+
+echo "✅ All blog posts validated successfully!"
+exit 0

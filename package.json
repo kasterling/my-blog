@@ -6,7 +6,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "validate": "node scripts/validate-posts.js",
+    "validate:fix": "node scripts/validate-posts.js && echo '✅ All validations passed!'",
+    "prebuild": "npm run validate"
   },
   "dependencies": {
     "astro": "^5.14.1"
