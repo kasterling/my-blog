@@ -5,11 +5,11 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
     "astro": "astro",
     "validate": "node scripts/validate-posts.js",
     "validate:fix": "node scripts/validate-posts.js && echo '✅ All validations passed!'",
-    "prebuild": "npm run validate"
+    "prebuild": "npm run validate",
+    "preview": "node scripts/smart-start.js"
   },
   "dependencies": {
     "astro": "^5.14.1"
