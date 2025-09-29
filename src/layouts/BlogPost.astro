@@ -79,37 +79,43 @@ const { frontmatter } = Astro.props;
   }
 
   .mood {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--sage-green) 0%, var(--sage-muted) 100%);
     color: white;
     padding: 0.4rem 1rem;
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: 500;
     font-style: italic;
+    letter-spacing: 0.02em;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
   }
 
   .perspective {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: linear-gradient(135deg, var(--steel-blue) 0%, var(--steel-soft) 100%);
     color: white;
     padding: 0.4rem 1rem;
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
   }
 
   .post-title {
+    font-family: 'Playfair Display', serif;
     font-size: 3rem;
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.1;
     margin-bottom: 1rem;
-    color: #1a1a1a;
+    color: var(--charcoal-dark);
+    letter-spacing: -0.02em;
   }
 
   .post-description {
     font-size: 1.25rem;
-    color: #666;
+    color: var(--shadow-subtle);
     margin-bottom: 1.5rem;
     line-height: 1.6;
+    font-style: italic;
   }
 
   .post-meta {
@@ -118,7 +124,7 @@ const { frontmatter } = Astro.props;
     align-items: center;
     gap: 2rem;
     font-size: 0.875rem;
-    color: #888;
+    color: var(--shadow-subtle);
   }
 
   .tags {
@@ -127,10 +133,20 @@ const { frontmatter } = Astro.props;
   }
 
   .tag {
-    background: #f0f0f0;
+    background: var(--mist-light);
+    color: var(--steel-blue);
     padding: 0.25rem 0.75rem;
     border-radius: 15px;
     font-size: 0.75rem;
+    border: 1px solid rgba(90, 107, 93, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .tag:hover {
+    background: linear-gradient(135deg, var(--sage-green), var(--steel-blue));
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(90, 107, 93, 0.2);
   }
 
   .hero-image {
@@ -148,21 +164,25 @@ const { frontmatter } = Astro.props;
   .post-content {
     font-size: 1.125rem;
     line-height: 1.8;
-    color: #333;
+    color: var(--charcoal-light);
   }
 
   .post-content :global(h2) {
+    font-family: 'Playfair Display', serif;
     font-size: 2rem;
-    font-weight: 700;
+    font-weight: 600;
     margin: 3rem 0 1.5rem;
-    color: #1a1a1a;
+    color: var(--charcoal-dark);
+    line-height: 1.3;
   }
 
   .post-content :global(h3) {
+    font-family: 'Playfair Display', serif;
     font-size: 1.5rem;
     font-weight: 600;
     margin: 2.5rem 0 1rem;
-    color: #1a1a1a;
+    color: var(--charcoal-dark);
+    line-height: 1.3;
   }
 
   .post-content :global(p) {
@@ -177,11 +197,14 @@ const { frontmatter } = Astro.props;
   }
 
   .post-content :global(blockquote) {
-    border-left: 4px solid #0066cc;
+    border-left: 4px solid var(--sage-green);
     padding-left: 2rem;
     margin: 2rem 0;
     font-style: italic;
-    color: #555;
+    color: var(--shadow-subtle);
+    background: linear-gradient(135deg, var(--cream-warm) 0%, var(--mist-light) 100%);
+    padding: 1.5rem 2rem;
+    border-radius: 8px;
   }
 
   .post-content :global(ul, ol) {

@@ -1,0 +1,362 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BudgetGapChart from '../../components/BudgetGapChart.astro';
+import GoldRevaluationChart from '../../components/GoldRevaluationChart.astro';
+import PriceFloorChart from '../../components/PriceFloorChart.astro';
+
+// Get the enhanced post data
+const postData = {
+  title: "A Parent's Guide to America's Bold Financial Gamble",
+  description: "What Trump's Gold and Bitcoin Plan Means for Our Children's Future - An in-depth analysis of the unprecedented strategies being used to address America's $37 trillion debt crisis",
+  pubDate: new Date('2025-01-15'),
+  tags: ["economics", "debt-crisis", "gold", "bitcoin", "government-policy", "financial-future"],
+  mood: "analytical",
+  perspective: "How radical economic policies affect generational wealth transfer",
+  image: "/my-blog/images/blog-header.png"
+};
+
+const base = import.meta.env.BASE_URL;
+const baseUrl = base.endsWith('/') ? base.slice(0, -1) : base;
+---
+
+<Layout title={postData.title} description={postData.description}>
+  <article class="blog-post">
+    <header class="post-header">
+      {postData.image && (
+        <img src={postData.image} alt={postData.title} class="post-image" />
+      )}
+      <div class="post-meta">
+        {postData.mood && (
+          <span class="mood-badge">{postData.mood}</span>
+        )}
+        <time>{postData.pubDate.toLocaleDateString()}</time>
+      </div>
+      <h1>{postData.title}</h1>
+      {postData.description && (
+        <p class="post-description">{postData.description}</p>
+      )}
+      {postData.perspective && (
+        <div class="perspective-indicator">
+          <strong>Exploring:</strong> {postData.perspective}
+        </div>
+      )}
+    </header>
+
+    <div class="post-content">
+      <p class="intro-text">
+        What Trump's Gold and Bitcoin Plan Means for Our Children's Future - An in-depth analysis of the unprecedented strategies being used to address America's $37 trillion debt crisis.
+      </p>
+
+      <h2>The Problem: What's Really Happening with Our Debt?</h2>
+      
+      <p>
+        As I sit here thinking about my adult children's financial future, I can't help but feel a mix of concern and cautious optimism about the radical changes happening in our economy right now. Let's be honest about where we stand.
+      </p>
+
+      <BudgetGapChart />
+
+      <p>
+        This massive deficit isn't just numbers on a spreadsheet—it's a burden that gets passed directly to our children. Every year we don't address this, we're essentially borrowing against their future earning potential.
+      </p>
+
+      <h2>The Plan: Finding Hidden Treasure in Plain Sight</h2>
+
+      <p>
+        You're probably wondering: "How can the government just 'find' money to solve the debt crisis?"
+      </p>
+
+      <p>
+        Here's something that blew my mind: the government owns about 261 million ounces of gold, but it's valued on the books at just $42.22 per ounce – a price that hasn't been updated since 1973.
+      </p>
+
+      <GoldRevaluationChart />
+
+      <p>
+        Think about this for a moment. We're using Nixon-era accounting to value one of our most strategic assets. It's like valuing your house at 1973 prices and wondering why your net worth looks so low on paper.
+      </p>
+
+      <p>
+        This accounting quirk creates an enormous opportunity. By simply updating the books to reflect current market prices, the Treasury could theoretically access hundreds of billions in additional value.
+      </p>
+
+      <h2>The Market Effects: Creating Price Floors</h2>
+
+      <p>
+        Here's the question every parent should be asking: "What does this mean for protecting my family's financial future?"
+      </p>
+
+      <PriceFloorChart />
+
+      <p>
+        This is where things get interesting from an investment perspective. When governments hold assets as strategic reserves, they create what economists call "implicit support levels."
+      </p>
+
+      <p>
+        Think about it: If the US government holds Bitcoin or gold as part of its strategic reserves, they have a strong incentive to maintain or increase the value of those assets. It's not just about the investment—it's about the credibility of the entire monetary system.
+      </p>
+
+      <h2>What This Means for Your Family's Financial Strategy</h2>
+
+      <h3>The Opportunity</h3>
+      <ul>
+        <li><strong>Diversification Beyond Dollars:</strong> Having government backing creates new stability</li>
+        <li><strong>Inflation Hedge:</strong> Hard assets historically outperform during currency debasement</li>
+        <li><strong>Generational Wealth:</strong> Assets with government support tend to appreciate over longer time horizons</li>
+      </ul>
+
+      <h3>The Risks</h3>
+      <ul>
+        <li><strong>Policy Reversal:</strong> Future administrations could change course</li>
+        <li><strong>Market Volatility:</strong> Government support doesn't eliminate all volatility</li>
+        <li><strong>Implementation Risk:</strong> The gap between policy announcements and actual implementation</li>
+      </ul>
+
+      <h2>The Sterling Perspective</h2>
+
+      <p>
+        When I look at this situation, I keep coming back to one central question: Are we witnessing a necessary evolution of monetary policy, or a desperate attempt to avoid difficult choices?
+      </p>
+
+      <p>
+        The optimist in me sees a government finally acknowledging that our current fiscal path is unsustainable and taking bold action to address it. The gold revaluation alone could buy us time to implement more comprehensive reforms.
+      </p>
+
+      <p>
+        The realist in me worries that we're just finding more sophisticated ways to kick the can down the road. Marking up asset values doesn't change the fundamental math—we still need to address the underlying spending and revenue imbalances.
+      </p>
+
+      <p>
+        But here's what I keep coming back to: As parents, we can't control fiscal policy, but we can control how we respond to it. Whether these policies succeed or fail, having a portion of our family's wealth in assets that governments want to support seems like a reasonable hedge.
+      </p>
+
+      <p>
+        The key is understanding that this isn't investment advice—it's risk management. We're not betting on gold and Bitcoin; we're hedging against the possibility that traditional monetary policy has reached its limits.
+      </p>
+
+      <p>
+        What strikes me most is how this forces us to think differently about wealth preservation. For decades, the conventional wisdom was simple: diversify across stocks and bonds, maybe add some real estate. Now we're in a world where governments are actively experimenting with their monetary systems in real-time.
+      </p>
+
+      <p>
+        That's both terrifying and fascinating. And as someone responsible for helping secure my family's financial future, I find myself paying very close attention to these experiments—not because I think I can predict their outcomes, but because I need to understand the range of possible scenarios we might face.
+      </p>
+
+      <p>
+        The one thing I'm certain of? The next decade is going to be unlike anything we've experienced in our lifetimes. And that means our financial strategies need to evolve too.
+      </p>
+
+      <div class="disclaimer">
+        <p><em>This analysis represents my personal perspective on current economic policies and should not be considered financial advice. Always consult with qualified financial professionals before making investment decisions.</em></p>
+      </div>
+    </div>
+
+    {postData.tags && postData.tags.length > 0 && (
+      <footer class="post-footer">
+        <div class="tags">
+          {postData.tags.map(tag => (
+            <span class="tag">#{tag}</span>
+          ))}
+        </div>
+      </footer>
+    )}
+  </article>
+</Layout>
+
+<style>
+  .blog-post {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .post-header {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .post-image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+  }
+
+  .mood-badge {
+    background: linear-gradient(135deg, var(--sage-green) 0%, var(--sage-muted) 100%);
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: 0.02em;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  }
+
+  .post-meta time {
+    color: var(--shadow-subtle);
+  }
+
+  .blog-post h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--charcoal-dark);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .post-description {
+    font-size: 1.125rem;
+    color: var(--shadow-subtle);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .perspective-indicator {
+    background: linear-gradient(135deg, var(--cream-warm) 0%, var(--mist-light) 100%);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-style: italic;
+    color: var(--steel-blue);
+    border-left: 4px solid var(--sage-green);
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(90, 107, 93, 0.15);
+  }
+
+  .post-content {
+    line-height: 1.7;
+    font-size: 1.1rem;
+    color: var(--charcoal-light);
+  }
+
+  .intro-text {
+    font-size: 1.2rem;
+    color: var(--steel-blue);
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--warm-light) 0%, var(--cream-warm) 100%);
+    border-radius: 8px;
+  }
+
+  .post-content h2 {
+    font-family: 'Playfair Display', serif;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    color: var(--charcoal-dark);
+    font-weight: 600;
+    line-height: 1.3;
+    font-size: 1.8rem;
+  }
+
+  .post-content h3 {
+    font-family: 'Playfair Display', serif;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--charcoal-dark);
+    font-weight: 600;
+    line-height: 1.3;
+    font-size: 1.4rem;
+  }
+
+  .post-content p {
+    margin-bottom: 1.5rem;
+  }
+
+  .post-content ul {
+    margin: 1.5rem 0;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .post-content li {
+    margin-bottom: 0.75rem;
+    position: relative;
+    padding-left: 1.5rem;
+  }
+
+  .post-content li::before {
+    content: '•';
+    color: var(--sage-green);
+    font-size: 1.2rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  .disclaimer {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--warm-light) 0%, var(--cream-warm) 100%);
+    border-radius: 8px;
+    border-left: 4px solid var(--steel-blue);
+  }
+
+  .disclaimer p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--shadow-subtle);
+  }
+
+  .post-footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(90, 107, 93, 0.2);
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .tag {
+    background: var(--mist-light);
+    color: var(--steel-blue);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid rgba(90, 107, 93, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .tag:hover {
+    background: linear-gradient(135deg, var(--sage-green), var(--steel-blue));
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(90, 107, 93, 0.25);
+  }
+
+  @media (max-width: 768px) {
+    .blog-post {
+      padding: 1rem;
+    }
+
+    .blog-post h1 {
+      font-size: 2rem;
+    }
+
+    .post-meta {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+</style>

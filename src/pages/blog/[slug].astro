@@ -83,55 +83,66 @@ const { Content } = await entry.render();
   }
 
   .mood-badge {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--sage-green) 0%, var(--sage-muted) 100%);
     color: white;
-    padding: 0.3rem 0.8rem;
-    border-radius: 15px;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
     font-size: 0.75rem;
     font-weight: 500;
     font-style: italic;
+    letter-spacing: 0.02em;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
   }
 
   .post-meta time {
-    color: #666;
+    color: var(--shadow-subtle);
   }
 
   .blog-post h1 {
+    font-family: 'Playfair Display', serif;
     font-size: 2.5rem;
-    font-weight: 900;
-    color: #1a1a1a;
+    font-weight: 700;
+    color: var(--charcoal-dark);
     margin-bottom: 1rem;
     line-height: 1.2;
+    letter-spacing: -0.02em;
   }
 
   .post-description {
     font-size: 1.125rem;
-    color: #666;
+    color: var(--shadow-subtle);
     font-style: italic;
     margin-bottom: 1.5rem;
+    line-height: 1.6;
   }
 
   .perspective-indicator {
-    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    background: linear-gradient(135deg, var(--cream-warm) 0%, var(--mist-light) 100%);
     padding: 1rem 1.5rem;
-    border-radius: 8px;
+    border-radius: 12px;
     font-style: italic;
-    color: #8b4513;
+    color: var(--steel-blue);
+    border-left: 4px solid var(--sage-green);
     margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(90, 107, 93, 0.15);
   }
 
   .post-content {
     line-height: 1.7;
     font-size: 1.1rem;
-    color: #333;
+    color: var(--charcoal-light);
   }
 
   .post-content :global(h1),
   .post-content :global(h2),
   .post-content :global(h3) {
+    font-family: 'Playfair Display', serif;
     margin-top: 2rem;
     margin-bottom: 1rem;
-    color: #1a1a1a;
+    color: var(--charcoal-dark);
+    font-weight: 600;
+    line-height: 1.3;
   }
 
   .post-content :global(p) {
@@ -149,7 +160,7 @@ const { Content } = await entry.render();
   .post-footer {
     margin-top: 3rem;
     padding-top: 2rem;
-    border-top: 1px solid #e2e8f0;
+    border-top: 1px solid rgba(90, 107, 93, 0.2);
   }
 
   .tags {
@@ -160,12 +171,21 @@ const { Content } = await entry.render();
   }
 
   .tag {
-    background: #f1f5f9;
-    color: #475569;
+    background: var(--mist-light);
+    color: var(--steel-blue);
     padding: 0.5rem 1rem;
     border-radius: 20px;
     font-size: 0.875rem;
     font-weight: 500;
+    border: 1px solid rgba(90, 107, 93, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .tag:hover {
+    background: linear-gradient(135deg, var(--sage-green), var(--steel-blue));
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(90, 107, 93, 0.25);
   }
 
   @media (max-width: 768px) {

@@ -114,10 +114,22 @@ const recentPerspectives = [...new Set(
 
   .hero {
     text-align: center;
-    padding: 4rem 0;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    margin: -2rem -2rem 4rem;
-    border-radius: 0 0 2rem 2rem;
+    padding: 6rem 0 4rem;
+    background: linear-gradient(135deg, var(--fog-white) 0%, var(--warm-light) 50%, var(--cream-warm) 100%);
+    margin: 0 0 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at center top, rgba(90, 107, 93, 0.08) 0%, transparent 70%);
+    pointer-events: none;
   }
 
   .hero-visual {
@@ -140,44 +152,52 @@ const recentPerspectives = [...new Set(
   }
 
   .hero-title {
-    font-size: 3.5rem;
-    font-weight: 900;
-    color: #1a1a1a;
-    margin-bottom: 1rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--charcoal-dark);
+    margin-bottom: 1.5rem;
     line-height: 1.1;
+    letter-spacing: -0.03em;
+    text-shadow: 0 2px 10px rgba(45, 45, 45, 0.1);
   }
 
   .hero-subtitle {
-    font-size: 1.5rem;
-    color: #4a5568;
-    margin-bottom: 2rem;
-    font-weight: 600;
+    font-size: 1.4rem;
+    color: var(--steel-blue);
+    margin-bottom: 2.5rem;
+    font-weight: 500;
     font-style: italic;
+    letter-spacing: 0.01em;
   }
 
   .hero-description {
     font-size: 1.125rem;
-    color: #666;
-    line-height: 1.7;
+    color: var(--shadow-subtle);
+    line-height: 1.8;
     max-width: 700px;
-    margin: 0 auto 2rem;
+    margin: 0 auto 3rem;
+    font-weight: 400;
   }
 
   .value-proposition {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--sage-green) 0%, var(--steel-blue) 100%);
     color: white;
-    padding: 1.5rem 2rem;
-    border-radius: 12px;
+    padding: 2rem 2.5rem;
+    border-radius: 16px;
     margin: 0 auto;
-    max-width: 600px;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    max-width: 650px;
+    box-shadow: 0 8px 25px rgba(69, 90, 100, 0.25);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .value-proposition p {
     margin: 0;
-    font-size: 1rem;
+    font-size: 1.1rem;
     line-height: 1.6;
     text-align: center;
+    font-weight: 400;
   }
 
   .perspectives {
@@ -200,12 +220,13 @@ const recentPerspectives = [...new Set(
   }
 
   .perspective-tag {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: linear-gradient(135deg, var(--sage-green) 0%, var(--steel-blue) 100%);
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 25px;
     font-size: 0.9rem;
     font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
   }
 
   .recent-posts {
@@ -226,17 +247,36 @@ const recentPerspectives = [...new Set(
   }
 
   .post-card {
-    background: white;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 2rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: rgba(254, 254, 254, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(90, 107, 93, 0.15);
+    border-radius: 16px;
+    padding: 2.5rem;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 20px rgba(45, 45, 45, 0.06);
+    position: relative;
+  }
+
+  .post-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--sage-green) 0%, var(--steel-blue) 100%);
+    border-radius: 16px 16px 0 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
 
   .post-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(45, 45, 45, 0.12);
+  }
+
+  .post-card:hover::before {
+    opacity: 1;
   }
 
   .post-meta {
@@ -248,13 +288,15 @@ const recentPerspectives = [...new Set(
   }
 
   .mood-badge {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--sage-green) 0%, var(--sage-muted) 100%);
     color: white;
-    padding: 0.3rem 0.8rem;
-    border-radius: 15px;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
     font-size: 0.75rem;
     font-weight: 500;
     font-style: italic;
+    letter-spacing: 0.02em;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
   }
 
   .post-card time {
@@ -286,11 +328,12 @@ const recentPerspectives = [...new Set(
   .perspective-preview {
     margin-bottom: 1rem;
     padding: 0.75rem;
-    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    background: linear-gradient(135deg, var(--cream-warm) 0%, var(--mist-light) 100%);
     border-radius: 8px;
     font-size: 0.875rem;
     font-style: italic;
-    color: #8b4513;
+    color: var(--steel-blue);
+    border-left: 3px solid var(--sage-green);
   }
 
   .tags {
@@ -300,12 +343,13 @@ const recentPerspectives = [...new Set(
   }
 
   .tag {
-    background: #f1f5f9;
-    color: #475569;
+    background: var(--mist-light);
+    color: var(--steel-blue);
     padding: 0.25rem 0.6rem;
     border-radius: 12px;
     font-size: 0.75rem;
     font-weight: 500;
+    border: 1px solid rgba(90, 107, 93, 0.1);
   }
 
   .tag-cloud {
@@ -327,21 +371,22 @@ const recentPerspectives = [...new Set(
   }
 
   .tag-link {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    color: #475569;
+    background: var(--warm-light);
+    border: 1px solid rgba(90, 107, 93, 0.15);
+    color: var(--steel-blue);
     padding: 0.5rem 1rem;
     border-radius: 20px;
     text-decoration: none;
     font-size: 0.875rem;
     font-weight: 500;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
   }
 
   .tag-link:hover {
-    background: #0066cc;
+    background: linear-gradient(135deg, var(--sage-green), var(--steel-blue));
     color: white;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(90, 107, 93, 0.25);
   }
 
   .no-posts {

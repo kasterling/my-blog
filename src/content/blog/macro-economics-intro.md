@@ -1,5 +1,5 @@
 ---
-title: "Macro Economics (Into)"
+title: "Macro Economics (Intro)"
 description: "My journey into macroeconomics through the lens of Maslow's Hierarchy of Needs and Forex trading"
 pubDate: 2025-01-15
 tags: ["forex", "macroeconomics", "personal-finance", "maslow", "trading"]
