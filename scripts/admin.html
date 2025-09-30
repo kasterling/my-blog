@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Management</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; background-color: #f8f9fa; color: #212529; margin: 0; padding: 2rem; }
+        .container { max-width: 800px; margin: 0 auto; background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        h1 { margin-top: 0; color: #343a40; }
+        .post-list { list-style: none; padding: 0; margin-top: 2rem; }
+        .post-item { display: flex; align-items: center; justify-content: space-between; padding: 1rem; border-bottom: 1px solid #e9ecef; transition: background-color 0.2s; }
+        .post-item:last-child { border-bottom: none; }
+        .post-item:hover { background-color: #f1f3f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; color: #495057; }
+        .post-controls { display: flex; align-items: center; gap: 1rem; }
+        .delete-btn { background: #e03131; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; font-weight: 500; transition: background-color 0.2s; }
+        .delete-btn:hover { background: #c92a2a; }
+        .switch { position: relative; display: inline-block; width: 50px; height: 28px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ced4da; transition: .4s; border-radius: 28px; }
+        .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: #28a745; }
+        input:checked + .slider:before { transform: translateX(22px); }
+        .draft-label { font-size: 0.9rem; color: #868e96; margin-right: 0.5rem; }
+        .new-post-form { display: flex; gap: 1rem; margin-bottom: 2rem; }
+        .new-post-form input { flex-grow: 1; padding: 0.75rem; border: 1px solid #ced4da; border-radius: 4px; font-size: 1rem; }
+        .new-post-form button { background: #007bff; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 4px; font-size: 1rem; font-weight: 500; cursor: pointer; transition: background-color 0.2s; margin-right: 0.5rem; }
+        .new-post-form button:hover { background: #0056b3; }
+        #create-from-perspective-btn { background: #28a745; }
+        #create-from-perspective-btn:hover { background: #1e7e34; }
+        
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; }
+        .modal-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 2rem; border-radius: 8px; min-width: 400px; }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+        .form-group input, .form-group select { width: 100%; padding: 0.75rem; border: 1px solid #ced4da; border-radius: 4px; font-size: 1rem; }
+        .modal-buttons { display: flex; gap: 1rem; margin-top: 1.5rem; }
+        .modal-buttons button { flex: 1; padding: 0.75rem; border-radius: 4px; font-size: 1rem; font-weight: 500; cursor: pointer; border: none; }
+        #create-perspective-post-btn { background: #28a745; color: white; }
+        #create-perspective-post-btn:hover { background: #1e7e34; }
+        #cancel-perspective-btn { background: #6c757d; color: white; }
+        #cancel-perspective-btn:hover { background: #545b62; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Site Management</h1>
+
+        <div class="new-post-form">
+            <input type="text" id="new-post-title" placeholder="Enter new post title...">
+            <button id="create-post-btn">Create Post</button>
+            <button id="create-from-perspective-btn">Create from Perspective</button>
+        </div>
+
+        <div id="perspective-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h3>Create Post from Perspective</h3>
+                <div class="form-group">
+                    <label for="perspective-title">Post Title:</label>
+                    <input type="text" id="perspective-title" placeholder="Enter post title...">
+                </div>
+                <div class="form-group">
+                    <label for="perspective-select">Choose Perspective:</label>
+                    <select id="perspective-select">
+                        <option value="">Loading perspectives...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="mood-select">Mood:</label>
+                    <select id="mood-select">
+                        <option value="exploratory">Exploratory</option>
+                        <option value="analytical">Analytical</option>
+                        <option value="reflective">Reflective</option>
+                    </select>
+                </div>
+                <div class="modal-buttons">
+                    <button id="create-perspective-post-btn">Create Post</button>
+                    <button id="cancel-perspective-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <ul id="post-list" class="post-list"></ul>
+    </div>
+
+    <script src="./admin.js"></script>
+</body>
+</html>

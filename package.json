@@ -9,9 +9,13 @@
     "validate": "node scripts/validate-posts.js",
     "validate:fix": "node scripts/validate-posts.js && echo '✅ All validations passed!'",
     "prebuild": "npm run validate",
-    "preview": "node scripts/smart-start.js"
+    "preview": "node scripts/smart-start.js",
+    "admin": "node scripts/admin-server.js"
   },
   "dependencies": {
-    "astro": "^5.14.1"
+    "astro": "^5.14.1",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
   }
 }
