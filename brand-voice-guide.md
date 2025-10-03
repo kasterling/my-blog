@@ -160,9 +160,9 @@ The magic happens where different fields intersect - let curiosity lead, pattern
 - "Ray Dalio's economic principles indicate..."
 
 ### **Post Length**
-- Aim for 1,200-2,000 words
-- Long enough to provide substantial value
-- Short enough to maintain engagement
+- Aim for 1,500-2,500 words.
+- Research shows this is the optimal range for in-depth topics to rank well on search engines and keep readers engaged.
+- This length allows for thorough exploration of a topic without unnecessary fluff.
 
 ### **Visual Structure**
 - Use headers generously for scannability
