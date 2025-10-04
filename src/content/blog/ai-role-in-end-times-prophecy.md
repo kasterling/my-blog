@@ -1,6 +1,6 @@
 ---
 title: "AI and the Echoes of Prophecy"
-pubDate: "2025-10-02"
+pubDate: "2025-10-01"
 description: "An exploration of the surprising parallels between the rise of artificial intelligence and the themes of ancient end-times prophecies."
 author: "Keith Sterling"
 tags: ["ai", "theology", "prophecy", "philosophy", "technology"]
