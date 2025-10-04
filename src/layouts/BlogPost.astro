@@ -49,6 +49,14 @@ const { frontmatter } = Astro.props;
         )}
       </div>
     </header>
+
+    {frontmatter.audioUrl && (
+      <div class="audio-player-wrapper" style="margin: 2rem 0; display: flex; justify-content: center;">
+        <audio controls src={frontmatter.audioUrl} style="width: 100%; max-width: 600px;">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    )}
     
     {frontmatter.image && (
       <div class="hero-image">

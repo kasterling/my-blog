@@ -4,6 +4,7 @@ pubDate: "2025-10-02"
 description: "An exploration of the surprising parallels between the rise of artificial intelligence and the themes of ancient end-times prophecies."
 author: "Keith Sterling"
 tags: ["ai", "theology", "prophecy", "philosophy", "technology"]
+audioUrl: "/blog-audio/ai-role-in-end-times-prophecy.wav"
 ---
 
 ## Introduction
