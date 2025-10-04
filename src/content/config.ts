@@ -10,6 +10,7 @@ const blog = defineCollection({
     tags: z.array(z.string()).default([]),
     suggestedTags: z.array(z.string()).optional(),
     image: z.string().optional(),
+    audioUrl: z.string().optional(),
     draft: z.boolean().default(false),
     mood: z.string().optional(), // reflective, analytical, exploratory, etc.
     perspective: z.string().optional() // main viewpoint being examined
