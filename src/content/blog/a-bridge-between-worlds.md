@@ -4,6 +4,7 @@ pubDate: "2025-10-02"
 description: "An exploration of how stablecoins are acting as a bridge between traditional finance and a new, emerging financial system."
 author: "Keith Sterling"
 tags: ["finance", "crypto", "bitcoin", "stablecoins", "economics"]
+image: "/my-blog/images/Stablecoin_bridge.png"
 ---
 
 ## Introduction

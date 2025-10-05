@@ -17,13 +17,6 @@ const sortedPosts = allPosts.sort((a, b) =>
 const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))];
 const popularTags = allTags.slice(0, 12); // Show first 12 tags
 
-// Get recent perspectives
-const recentPerspectives = [...new Set(
-  allPosts
-    .filter(post => post.data.perspective)
-    .map(post => post.data.perspective)
-    .slice(0, 6)
-)];
 ---
 
 <Layout title="The Sterling Perspective" description="Examining perspectives against perceptions - exploring ideas as they evolve">
@@ -44,43 +37,39 @@ const recentPerspectives = [...new Set(
       </div>
     </section>
 
-    {recentPerspectives.length > 0 && (
-      <section class="perspectives">
-        <h2>Recent Explorations</h2>
-        <div class="perspective-tags">
-          {recentPerspectives.map(perspective => (
-            <span class="perspective-tag">{perspective}</span>
-          ))}
-        </div>
-      </section>
-    )}
-
     <section class="recent-posts">
       <h2>Latest Thoughts</h2>
       {sortedPosts.length > 0 ? (
         <div class="posts-grid">
           {sortedPosts.slice(0, 6).map(post => (
             <article class="post-card">
-              <div class="post-meta">
-                {post.data.mood && (
-                  <span class="mood-badge">{post.data.mood}</span>
+              {post.data.image && (
+                <div class="post-card-image">
+                  <img src={post.data.image} alt={post.data.title} />
+                </div>
+              )}
+              <div class="post-card-content">
+                <div class="post-meta">
+                  {post.data.mood && (
+                    <span class="mood-badge">{post.data.mood}</span>
+                  )}
+                  <time>{new Date(post.data.pubDate).toLocaleDateString()}</time>
+                </div>
+                <h3><a href={`${baseUrl}/blog/${post.slug}`}>{post.data.title}</a></h3>
+                <p>{post.data.description}</p>
+                {post.data.perspective && (
+                  <div class="perspective-preview">
+                    <span>Exploring: {post.data.perspective}</span>
+                  </div>
                 )}
-                <time>{new Date(post.data.pubDate).toLocaleDateString()}</time>
+                {post.data.tags && post.data.tags.length > 0 && (
+                  <div class="tags">
+                    {post.data.tags.slice(0, 4).map(tag => (
+                      <span class="tag">#{tag}</span>
+                    ))}
+                  </div>
+                )}
               </div>
-              <h3><a href={`${baseUrl}/blog/${post.slug}`}>{post.data.title}</a></h3>
-              <p>{post.data.description}</p>
-              {post.data.perspective && (
-                <div class="perspective-preview">
-                  <span>Exploring: {post.data.perspective}</span>
-                </div>
-              )}
-              {post.data.tags && post.data.tags.length > 0 && (
-                <div class="tags">
-                  {post.data.tags.slice(0, 4).map(tag => (
-                    <span class="tag">#{tag}</span>
-                  ))}
-                </div>
-              )}
             </article>
           ))}
         </div>
@@ -200,35 +189,6 @@ const recentPerspectives = [...new Set(
     font-weight: 400;
   }
 
-  .perspectives {
-    margin-bottom: 3rem;
-    text-align: center;
-  }
-
-  .perspectives h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    color: #1a1a1a;
-  }
-
-  .perspective-tags {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-  }
-
-  .perspective-tag {
-    background: linear-gradient(135deg, var(--sage-green) 0%, var(--steel-blue) 100%);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 25px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-  }
-
   .recent-posts {
     margin-bottom: 4rem;
   }
@@ -251,10 +211,33 @@ const recentPerspectives = [...new Set(
     backdrop-filter: blur(10px);
     border: 1px solid rgba(90, 107, 93, 0.15);
     border-radius: 16px;
-    padding: 2.5rem;
     transition: all 0.4s ease;
     box-shadow: 0 4px 20px rgba(45, 45, 45, 0.06);
     position: relative;
+    overflow: hidden;
+  }
+
+  .post-card-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 16px 16px 0 0;
+    margin: 0;
+  }
+
+  .post-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .post-card:hover .post-card-image img {
+    transform: scale(1.05);
+  }
+
+  .post-card-content {
+    padding: 2.5rem;
   }
 
   .post-card::before {
@@ -429,10 +412,6 @@ const recentPerspectives = [...new Set(
       flex-direction: column;
       align-items: flex-start;
       gap: 0.5rem;
-    }
-
-    .perspective-tags {
-      justify-content: center;
     }
   }
 </style>

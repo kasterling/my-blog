@@ -5,14 +5,13 @@ pubDate: 2025-09-30
 tags: ["parenting", "AI", "education", "career-future", "family", "technology"]
 mood: "reflective"
 perspective: "How to foster autonomy while maintaining emotional bonds"
+image: "/my-blog/images/AIclassroom.png"
 draft: false
 ---
 
 # When I Look at My Children's Teaching Careers Through an AI Lens
 
-Both of my daughters chose education. Not the safe, predictable education field I remember from my own schooling—they're entering a profession that's being fundamentally reshaped by artificial intelligence. As I watch them build their careers, I'm caught between wanting to prepare them for what's coming and respecting their autonomy to navigate their own professional paths.
-
-The tension is real: How do you support adult children facing career uncertainty without becoming the overprotective parent who undermines their confidence?
+Both of my daughters chose education. Not the safe, predictable education field I remember from my own schooling—they're entering a profession that's being fundamentally reshaped by artificial intelligence. As I watch them build their careers, I'm caught between wanting to prepare them for what's coming and respecting their autonomy to navigate their own professional paths. The tension is real: How do you support adult children facing career uncertainty without becoming the overprotective parent who undermines their confidence?
 
 ## The Assumption I'm Questioning
 

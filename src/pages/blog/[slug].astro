@@ -36,6 +36,20 @@ const { Content } = await entry.render();
       )}
     </header>
 
+    {entry.data.audioUrl && (
+      <div class="audio-player-wrapper">
+        <div class="audio-header">
+          <h3>🎧 Listen to this perspective</h3>
+          <p>Prefer to listen? Here's the audio version of this post.</p>
+        </div>
+        <audio controls preload="metadata">
+          <source src={entry.data.audioUrl} type="audio/wav" />
+          <source src={entry.data.audioUrl.replace('.wav', '.mp3')} type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    )}
+
     <div class="post-content">
       <Content />
     </div>
@@ -126,6 +140,46 @@ const { Content } = await entry.render();
     margin-bottom: 2rem;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(90, 107, 93, 0.15);
+  }
+
+  .audio-player-wrapper {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--cream-warm) 0%, var(--mist-light) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(90, 107, 93, 0.1);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  }
+
+  .audio-header {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .audio-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: var(--charcoal-dark);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .audio-header p {
+    color: var(--shadow-subtle);
+    font-size: 0.9rem;
+    margin: 0;
+    font-style: italic;
+  }
+
+  .audio-player-wrapper audio {
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    outline: none;
+  }
+
+  .audio-player-wrapper audio::-webkit-media-controls-panel {
+    background-color: var(--sage-green);
+    border-radius: 8px;
   }
 
   .post-content {

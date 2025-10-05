@@ -51,17 +51,23 @@ const { frontmatter } = Astro.props;
       </div>
     </header>
 
-    {frontmatter.audioUrl && (
-      <div class="audio-player-wrapper" style="margin: 2rem 0; display: flex; justify-content: center;">
-        <audio controls src={frontmatter.audioUrl} style="width: 100%; max-width: 600px;">
-          Your browser does not support the audio element.
-        </audio>
-      </div>
-    )}
-    
     {frontmatter.image && (
       <div class="hero-image">
         <img src={frontmatter.image} alt={frontmatter.title} />
+      </div>
+    )}
+
+    {frontmatter.audioUrl && (
+      <div class="audio-player-wrapper">
+        <div class="audio-header">
+          <h3>🎧 Listen to this perspective</h3>
+          <p>Prefer to listen? Here's the audio version of this post.</p>
+        </div>
+        <audio controls preload="metadata">
+          <source src={frontmatter.audioUrl} type="audio/wav" />
+          <source src={frontmatter.audioUrl.replace('.wav', '.mp3')} type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
       </div>
     )}
     
@@ -162,12 +168,61 @@ const { frontmatter } = Astro.props;
     margin: 2rem 0;
     border-radius: 12px;
     overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hero-image:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
   }
 
   .hero-image img {
     width: 100%;
     height: auto;
     display: block;
+    max-height: 400px;
+    object-fit: cover;
+  }
+
+  .audio-player-wrapper {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--cream-warm) 0%, var(--mist-light) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(90, 107, 93, 0.1);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  }
+
+  .audio-header {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .audio-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: var(--charcoal-dark);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .audio-header p {
+    color: var(--shadow-subtle);
+    font-size: 0.9rem;
+    margin: 0;
+    font-style: italic;
+  }
+
+  .audio-player-wrapper audio {
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    outline: none;
+  }
+
+  .audio-player-wrapper audio::-webkit-media-controls-panel {
+    background-color: var(--sage-green);
+    border-radius: 8px;
   }
 
   .post-content {

@@ -5,6 +5,7 @@ pubDate: "2025-08-26"
 tags: ["perspective", "psychology", "philosophy", "travel"]
 mood: "reflective"
 perspective: "examining the value of shifting focus from negative to positive"
+image: "/my-blog/images/blog-header.png"
 draft: false
 ---
 
