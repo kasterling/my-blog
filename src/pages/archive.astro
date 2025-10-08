@@ -1,119 +1,26 @@
 ---
-import { getCollection } from "astro:content";
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
 
-// Get all blog posts and sort by date (newest first)
-const allPosts = await getCollection("blog");
-const sortedPosts = allPosts
-  .filter(post => !post.data.draft)
-  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf());
 
-// Format date helper
-function formatDate(date: Date): string {
-  return new Date(date).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
-}
+const pageTitle = "Blog Archive";
 ---
-
-<BaseLayout title="Archive: Dad's View - The Sterling Perspective">
-  <Header />
-  <!-- Main Content Area: Archive Page -->
-  <main class="flex-grow py-12 md:py-20">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- B. Role Header Section -->
-      <section class="mb-12 md:mb-16 text-center border-b border-gray-300 pb-10">
-        <div class="role-header-icon mx-auto">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-8 h-8"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            ><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><path
-              d="M9 22V12h6v10" /></svg
-          >
-        </div>
-        <h1
-          class="text-4xl sm:text-5xl font-serif-custom font-extrabold leading-tight text-charcoal mb-4"
-        >
-          Dad's View
-        </h1>
-        <p class="text-xl text-slate max-w-2xl mx-auto">
-          A collection of perspectives on raising resilient, self-aware children
-          in a rapidly changing world. These are the lessons my kids teach me,
-          organized.
-        </p>
-        <p class="text-base text-gray-500 mt-4 font-medium">
-          {sortedPosts.length} Perspectives Published
-        </p>
-      </section>
-
-      <!-- C. Article List -->
-      <section class="space-y-8">
-        {sortedPosts.map((post, index) => (
-          <a
-            href={`/my-blog/blog/${post.slug}`}
-            class={`block p-6 bg-white rounded-lg transition duration-300 ${
-              index === 0
-                ? 'shadow-xl border-l-8 border-amber hover:shadow-2xl'
-                : 'shadow-md border-l-4 border-slate hover:shadow-lg'
-            }`}
-          >
-            {index === 0 && <span class="role-badge mb-2 bg-amber">Featured</span>}
-            <h3
-              class={`${index === 0 ? 'mt-2' : ''} text-2xl ${index === 0 ? 'md:text-3xl' : ''} font-serif-custom font-bold text-charcoal hover:text-amber`}
-            >
-              {post.data.title}
-            </h3>
-            <p class="mt-2 text-gray-600 line-clamp-2">
-              {post.data.description}
-            </p>
-            <p class="mt-4 text-sm text-gray-500">
-              {formatDate(post.data.pubDate)}
-              {post.data.mood && ` · ${post.data.mood}`}
-            </p>
+<BaseLayout pageTitle={pageTitle}>
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold text-center mb-8 font-serif-custom">{pageTitle}</h1>
+    <ul class="space-y-4">
+      {sortedPosts.map((post) => (
+        <li class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+          <a href={`/my-blog/blog/${post.slug}/`} class="text-2xl font-semibold text-slate hover:text-amber font-serif-custom">
+            {post.data.title}
           </a>
-        ))}
-      </section>
-
-      <!-- D. Subscription CTA Block (Reused) -->
-      <section class="mt-16 bg-slate p-8 rounded-xl shadow-2xl">
-        <div class="text-center">
-          <h3 class="text-3xl font-serif-custom font-bold mb-3 text-amber">
-            Never Miss a Perspective.
-          </h3>
-          <p class="text-gray-300 text-lg mb-6">
-            Get all the essays on work, family, and personal growth sent
-            straight to your inbox.
+          <p class="text-sm text-gray-500 mt-2">
+            {new Date(post.data.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
           </p>
-          <form
-            class="flex flex-col sm:flex-row max-w-xl mx-auto space-y-4 sm:space-y-0 sm:space-x-4"
-          >
-            <input
-              type="email"
-              placeholder="Your Best Email Address"
-              required
-              class="w-full px-5 py-3 border-none rounded-lg text-charcoal placeholder-gray-500 focus:ring-amber focus:border-amber"
-            />
-            <button
-              type="submit"
-              class="bg-amber text-charcoal font-bold px-6 py-3 rounded-lg shadow-xl hover:bg-opacity-90 transition duration-150 ease-in-out whitespace-nowrap"
-            >
-              Subscribe Now
-            </button>
-          </form>
-        </div>
-      </section>
-    </div>
-  </main>
-
-  <Footer />
+        </li>
+      ))}
+    </ul>
+  </div>
 </BaseLayout>
