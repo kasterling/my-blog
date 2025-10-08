@@ -4,7 +4,7 @@ pubDate: "2025-10-07"
 description: "Exploring the role of Artificial Intelligence as the 'embryo' in the 'digital womb' thesis, potentially giving 'life' to a global control system."
 author: "Keith Sterling"
 tags: ["theology", "technology", "ai", "eschatology", "beast system"]
-image: "/my-blog/images/matrix_fetus.png"
+image: "/images/matrix_fetus.png"
 ---
 
 ## Introduction

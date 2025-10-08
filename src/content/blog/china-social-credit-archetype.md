@@ -4,7 +4,7 @@ pubDate: "2025-10-09"
 description: "An analysis of China's Social Credit System as a modern archetype of the two-beast system, a 'Digital Panopticon' that fuses state power with technological control."
 author: "Keith Sterling"
 tags: ["theology", "archetype", "beast system", "eschatology", "china", "surveillance"]
-image: "/my-blog/images/matrix_fetus.png"
+image: "/images/matrix_fetus.png"
 ---
 
 ## Introduction

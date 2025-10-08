@@ -4,7 +4,7 @@ pubDate: "2025-10-07"
 description: "Part 4 of the series, synthesizing how Internet, Blockchain, and AI converge to form a potential global control system, the 'Digital Beast'."
 author: "Keith Sterling"
 tags: ["theology", "technology", "ai", "blockchain", "beast system", "eschatology"]
-image: "/my-blog/images/matrix_fetus.png"
+image: "/images/matrix_fetus.png"
 ---
 
 ## Introduction

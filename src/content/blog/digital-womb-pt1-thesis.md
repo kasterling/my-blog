@@ -4,7 +4,7 @@ pubDate: "2025-10-07"
 description: "An introductory post outlining the thesis that the progression of Internet -> Blockchain -> AI may be creating the technological framework for the prophesied Beast system."
 author: "Keith Sterling"
 tags: ["theology", "technology", "ai", "blockchain", "eschatology"]
-image: "/my-blog/images/matrix_fetus.png"
+image: "/images/matrix_fetus.png"
 ---
 
 ## Introduction
