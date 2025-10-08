@@ -4,7 +4,7 @@ pubDate: "2025-10-07"
 description: "Exploring the role of blockchain technology as a foundational layer in the 'digital womb' thesis, creating a permanent and unchangeable system of record."
 author: "Keith Sterling"
 tags: ["theology", "technology", "blockchain", "eschatology", "control systems"]
-image: "/my-blog/images/Stablecoin_bridge.png"
+image: "/my-blog/images/matrix_fetus.png"
 ---
 
 ## Introduction
