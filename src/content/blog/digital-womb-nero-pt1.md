@@ -4,7 +4,7 @@ pubDate: "2025-10-07"
 description: "An exploration of how the Roman Emperor Nero serves as a historical archetype for the prophesied end-times Antichrist."
 author: "Keith Sterling"
 tags: ["theology", "history", "nero", "antichrist", "eschatology"]
-image: "/my-blog/images/AIprophacy.png"
+image: "/my-blog/images/matrix_fetus.png"
 ---
 
 ## Introduction
