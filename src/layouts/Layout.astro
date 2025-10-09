@@ -2,9 +2,12 @@
 export interface Props {
   title: string;
   description?: string;
+  image?: string;
 }
 
-const { title, description = "Examining perspectives against perceptions" } = Astro.props;
+const { title, description = "Examining perspectives against perceptions", image } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImage = image ? new URL(image, Astro.site) : new URL(`${import.meta.env.BASE_URL}/images/blog-header.png`, Astro.site);
 ---
 
 <!DOCTYPE html>
@@ -13,19 +16,38 @@ const { title, description = "Examining perspectives against perceptions" } = As
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}/favicon.svg`} />
+    <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
     <title>{title} | The Sterling Perspective</title>
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:site_name" content="The Sterling Perspective" />
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={socialImage} />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "The Sterling Perspective",
+      "description": description,
+      "url": Astro.site,
+      "author": {
+        "@type": "Person",
+        "name": "Keith Sterling"
+      }
+    })} />
   </head>
   <body>
     <header class="site-header">
@@ -34,12 +56,47 @@ const { title, description = "Examining perspectives against perceptions" } = As
           <h1>The Sterling Perspective</h1>
           <p>Examining perspectives against perceptions</p>
         </a>
+        <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+          <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+          <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
         <div class="nav-links">
           <a href="/my-blog/" class="nav-home">Home</a>
+          <a href="/my-blog/archive" class="nav-archive">Archive</a>
           <a href="/my-blog/about" class="nav-about">About</a>
         </div>
       </nav>
     </header>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const menuToggle = document.querySelector('.mobile-menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (menuToggle && navLinks) {
+          menuToggle.addEventListener('click', () => {
+            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', (!isExpanded).toString());
+            navLinks.classList.toggle('mobile-open');
+          });
+
+          // Close menu when clicking a link
+          navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+              navLinks.classList.remove('mobile-open');
+              menuToggle.setAttribute('aria-expanded', 'false');
+            });
+          });
+        }
+      });
+    </script>
     
     <main>
       <slot />
@@ -47,7 +104,7 @@ const { title, description = "Examining perspectives against perceptions" } = As
     
     <footer class="site-footer">
       <div class="footer-content">
-        <p>&copy; 2024 Keith Sterling. Examining perspectives against perceptions.</p>
+        <p>&copy; {new Date().getFullYear()} Keith Sterling. Examining perspectives against perceptions.</p>
       </div>
     </footer>
   </body>
@@ -183,6 +240,43 @@ const { title, description = "Examining perspectives against perceptions" } = As
     width: 100%;
   }
 
+  .mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--charcoal-dark);
+    cursor: pointer;
+    padding: 0.5rem;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    transition: transform 0.2s ease;
+  }
+
+  .mobile-menu-toggle:hover {
+    transform: scale(1.1);
+  }
+
+  .mobile-menu-toggle svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.2s ease;
+  }
+
+  .mobile-menu-toggle .close-icon {
+    opacity: 0;
+  }
+
+  .mobile-menu-toggle[aria-expanded="true"] .menu-icon {
+    opacity: 0;
+  }
+
+  .mobile-menu-toggle[aria-expanded="true"] .close-icon {
+    opacity: 1;
+  }
+
   main {
     min-height: calc(100vh - 200px);
     padding: 0;
@@ -221,19 +315,52 @@ const { title, description = "Examining perspectives against perceptions" } = As
   /* Responsive */
   @media (max-width: 768px) {
     .nav-container {
-      flex-direction: column;
-      text-align: center;
-      gap: 1.5rem;
+      position: relative;
       padding: 0 1rem;
     }
 
+    .mobile-menu-toggle {
+      display: block;
+      order: 2;
+    }
+
+    .logo {
+      order: 1;
+    }
+
     .nav-links {
-      justify-content: center;
-      gap: 2rem;
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: rgba(254, 254, 254, 0.98);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(90, 107, 93, 0.15);
+      box-shadow: 0 8px 20px rgba(45, 45, 45, 0.1);
+      flex-direction: column;
+      gap: 0;
+      padding: 1rem 0;
+      margin-top: 1rem;
+      z-index: 99;
+    }
+
+    .nav-links.mobile-open {
+      display: flex;
     }
 
     .nav-links a {
-      font-size: 0.9rem;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      border-bottom: 1px solid rgba(90, 107, 93, 0.08);
+    }
+
+    .nav-links a:last-child {
+      border-bottom: none;
+    }
+
+    .nav-links a::after {
+      display: none;
     }
 
     .logo h1 {
@@ -242,12 +369,12 @@ const { title, description = "Examining perspectives against perceptions" } = As
   }
 
   @media (max-width: 480px) {
-    .nav-links {
-      gap: 1.5rem;
+    .logo h1 {
+      font-size: 1.25rem;
     }
-    
-    .nav-links a {
-      font-size: 0.85rem;
+
+    .logo p {
+      font-size: 0.8rem;
     }
   }
 </style>

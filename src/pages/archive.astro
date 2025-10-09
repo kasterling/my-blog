@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('blog');
@@ -7,20 +7,170 @@ const sortedPosts = allPosts.sort((a, b) => new Date(b.data.pubDate).valueOf() -
 
 const pageTitle = "Blog Archive";
 ---
-<BaseLayout pageTitle={pageTitle}>
-  <div class="container mx-auto px-4 py-8">
-    <h1 class="text-4xl font-bold text-center mb-8 font-serif-custom">{pageTitle}</h1>
-    <ul class="space-y-4">
+<Layout title={pageTitle} description="Complete archive of all blog posts from The Sterling Perspective">
+  <div class="archive-container">
+    <h1 class="archive-title">{pageTitle}</h1>
+    <p class="archive-description">All perspectives, chronologically organized</p>
+
+    <ul class="archive-list">
       {sortedPosts.map((post) => (
-        <li class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-          <a href={`/my-blog/blog/${post.slug}/`} class="text-2xl font-semibold text-slate hover:text-amber font-serif-custom">
-            {post.data.title}
+        <li class="archive-item">
+          <a href={`/my-blog/blog/${post.slug}/`} class="archive-link">
+            <h2 class="post-title">{post.data.title}</h2>
+            <p class="post-date">
+              {new Date(post.data.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </p>
+            {post.data.description && (
+              <p class="post-description">{post.data.description}</p>
+            )}
+            {post.data.tags && post.data.tags.length > 0 && (
+              <div class="post-tags">
+                {post.data.tags.map(tag => (
+                  <span class="tag">#{tag}</span>
+                ))}
+              </div>
+            )}
           </a>
-          <p class="text-sm text-gray-500 mt-2">
-            {new Date(post.data.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-          </p>
         </li>
       ))}
     </ul>
   </div>
-</BaseLayout>
+</Layout>
+
+<style>
+  .archive-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .archive-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 600;
+    color: var(--charcoal-dark);
+    text-align: center;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .archive-description {
+    text-align: center;
+    color: var(--steel-blue);
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-bottom: 4rem;
+  }
+
+  .archive-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .archive-item {
+    background: rgba(254, 254, 254, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    border: 1px solid rgba(90, 107, 93, 0.15);
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+
+  .archive-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(45, 45, 45, 0.12);
+    border-color: rgba(90, 107, 93, 0.3);
+  }
+
+  .archive-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: 2rem;
+  }
+
+  .post-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--charcoal-dark);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+    transition: color 0.2s ease;
+  }
+
+  .archive-item:hover .post-title {
+    color: var(--sage-green);
+  }
+
+  .post-date {
+    font-size: 0.9rem;
+    color: var(--steel-blue);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .post-description {
+    color: var(--shadow-subtle);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: linear-gradient(135deg, var(--sage-green), var(--steel-blue));
+    color: white;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  @media (max-width: 768px) {
+    .archive-container {
+      padding: 3rem 1.5rem;
+    }
+
+    .archive-title {
+      font-size: 2.25rem;
+    }
+
+    .archive-description {
+      font-size: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .post-title {
+      font-size: 1.5rem;
+    }
+
+    .archive-link {
+      padding: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .archive-container {
+      padding: 2rem 1rem;
+    }
+
+    .archive-title {
+      font-size: 1.75rem;
+    }
+
+    .post-title {
+      font-size: 1.25rem;
+    }
+  }
+</style>

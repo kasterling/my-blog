@@ -86,7 +86,7 @@ const popularTags = allTags.slice(0, 12); // Show first 12 tags
         <h2>Emerging Themes</h2>
         <div class="tags-grid">
           {popularTags.map(tag => (
-            <a href={`/my-blog/tag/${tag}`} class="tag-link">#{tag}</a>
+            <span class="tag-display">#{tag}</span>
           ))}
         </div>
       </section>
@@ -353,23 +353,15 @@ const popularTags = allTags.slice(0, 12); // Show first 12 tags
     gap: 0.75rem;
   }
 
-  .tag-link {
+  .tag-display {
     background: var(--warm-light);
     border: 1px solid rgba(90, 107, 93, 0.15);
     color: var(--steel-blue);
     padding: 0.5rem 1rem;
     border-radius: 20px;
-    text-decoration: none;
     font-size: 0.875rem;
     font-weight: 500;
-    transition: all 0.3s ease;
-  }
-
-  .tag-link:hover {
-    background: linear-gradient(135deg, var(--sage-green), var(--steel-blue));
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(90, 107, 93, 0.25);
+    display: inline-block;
   }
 
   .no-posts {

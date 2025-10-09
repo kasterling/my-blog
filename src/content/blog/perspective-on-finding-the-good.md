@@ -13,7 +13,7 @@ draft: false
 
 We go into certain experiences with a script. A vacation, especially one to a place like Hawaii, comes with a heavy weight of expectation. We have a perception of what it *should* be: perfect sunsets, seamless travel, and a highlight reel of flawless moments. We're chasing a preconceived notion of perfection.
 
-![A perfect Hawaiian sunset over the ocean](/images/Kona%202025_files/sunset_selfie.jpeg)
+![A perfect Hawaiian sunset over the ocean](/my-blog/images/Kona 2025_files/sunset_selfie.jpeg)
 
 But reality is never that clean. Life, even in paradise, is a mix of the sublime and the frustrating. My recent trip to Kona was a perfect real-world laboratory for this idea. It started with travel delays and included everything from humorous Uber mishaps to a highly anticipated volcano visit that turned out to be a complete letdown. It's incredibly easy to let those negative moments define the narrative. Why is that?
 
@@ -25,7 +25,7 @@ On the trip, the 'bad' was certainly present. There was the comical absurdity of
 
 But I'm learning that perspective isn't about what happens to you; it's about what you choose to focus on. And in the midst of the frustrations, there was an overwhelming amount of 'good.' There was the simple, unplanned joy of a morning by the pool. The quiet awe of standing before an old Catholic church. The shared laughter over sunset beers with friends. The easy breeze on a rented bike. These moments weren't on any itinerary. They didn't have the weight of expectation, and because of that, their goodness felt more authentic.
 
-![A photo of a quiet, unplanned moment, like an old church or a relaxing poolside view](/images/Kona%202025_files/beach_relaxing.jpeg)
+![A photo of a quiet, unplanned moment, like an old church or a relaxing poolside view](/my-blog/images/Kona 2025_files/beach_relaxing.jpeg)
 
 ## The Sterling Perspective
 
@@ -35,7 +35,7 @@ In writing this, I'm examining how that perspective has shifted. I now believe a
 
 The volcano was a bust, but the craft beers and tacos at Lanikai brewery afterward were a moment of genuine connection and enjoyment. The travel was a hassle, but the relief and beauty upon arrival were amplified because of it. The perfection I was seeking wasn't in the flawless execution of a plan, but in the authentic, unplanned moments of beauty and connection that were waiting to be noticed.
 
-![A picture capturing a moment of genuine connection, like sharing beers or tacos](/images/Kona%202025_files/beers.jpeg)
+![A picture capturing a moment of genuine connection, like sharing beers or tacos](/my-blog/images/Kona 2025_files/beers.jpeg)
 
 ## Finding the Good in the Everyday
 
@@ -45,4 +45,4 @@ But the good is also always there. A moment of quiet with a cup of coffee. A gen
 
 This leads me to a question I'm now asking myself: What good is already present in your life today that you might be overlooking while focusing on the inevitable negatives?
 
-![A final, beautiful landscape or contemplative shot from the trip](/images/Kona%202025_files/coffee_beach.jpeg)
+![A final, beautiful landscape or contemplative shot from the trip](/my-blog/images/Kona 2025_files/coffee_beach.jpeg)
