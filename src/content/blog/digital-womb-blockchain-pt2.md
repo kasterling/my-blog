@@ -1,5 +1,5 @@
 ---
-title: "The Digital Womb: Blockchain and the Unchangeable Record"
+title: "Part 3: The Digital Womb - Blockchain and the Unchangeable Record"
 pubDate: "2025-10-07"
 description: "Exploring the role of blockchain technology as a foundational layer in the 'digital womb' thesis, creating a permanent and unchangeable system of record."
 author: "Keith Sterling"

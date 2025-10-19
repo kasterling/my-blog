@@ -1,4 +1,7 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
+import Search from '../components/Search.astro';
+
 export interface Props {
   title: string;
   description?: string;
@@ -20,6 +23,7 @@ const socialImage = image ? new URL(image, Astro.site) : new URL(`${import.meta.
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
     <title>{title} | The Sterling Perspective</title>
+    <ViewTransitions />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -50,6 +54,7 @@ const socialImage = image ? new URL(image, Astro.site) : new URL(`${import.meta.
     })} />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <header class="site-header">
       <nav class="nav-container">
         <a href="/my-blog/" class="logo">
@@ -72,8 +77,16 @@ const socialImage = image ? new URL(image, Astro.site) : new URL(`${import.meta.
           <a href="/my-blog/archive" class="nav-archive">Archive</a>
           <a href="/my-blog/about" class="nav-about">About</a>
         </div>
+        <button class="search-toggle" aria-label="Open search" id="search-toggle-btn">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="8" cy="8" r="6"></circle>
+            <line x1="13" y1="13" x2="18" y2="18"></line>
+          </svg>
+        </button>
       </nav>
     </header>
+
+    <Search />
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
@@ -98,13 +111,19 @@ const socialImage = image ? new URL(image, Astro.site) : new URL(`${import.meta.
       });
     </script>
     
-    <main>
+    <main id="main-content">
       <slot />
     </main>
     
     <footer class="site-footer">
       <div class="footer-content">
-        <p>&copy; {new Date().getFullYear()} Keith Sterling. Examining perspectives against perceptions.</p>
+        <nav class="footer-nav">
+          <a href="/my-blog/">Home</a>
+          <a href="/my-blog/archive">Archive</a>
+          <a href="/my-blog/about">About</a>
+        </nav>
+        <p class="footer-copyright">&copy; {new Date().getFullYear()} Keith Sterling</p>
+        <p class="footer-tagline">Examining perspectives against perceptions</p>
       </div>
     </footer>
   </body>
@@ -121,18 +140,24 @@ const socialImage = image ? new URL(image, Astro.site) : new URL(`${import.meta.
     --sage-green: #5A6B5D;
     --warm-gray: #DADADA;
     --steel-blue: #455A64;
-    
+
     /* Extended palette for variety */
     --charcoal-light: #4A4A4A;
     --sage-muted: #6B7A6E;
     --warm-light: #F0F0F0;
     --steel-soft: #607D8B;
-    
+
     /* Accent and neutral tones */
     --fog-white: #FEFEFE;
     --shadow-subtle: #8A8A8A;
     --cream-warm: #F8F6F4;
     --mist-light: #E8E8E8;
+
+    /* Semantic colors for interactive states */
+    --text-primary: var(--charcoal-dark);
+    --text-secondary: var(--shadow-subtle);
+    --link-hover: var(--steel-blue);
+    --link-active: var(--sage-green);
   }
 
   * {
@@ -152,6 +177,41 @@ const socialImage = image ? new URL(image, Astro.site) : new URL(`${import.meta.
     color: var(--charcoal-dark);
     line-height: 1.7;
     font-weight: 400;
+  }
+
+  /* Skip link for accessibility */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--charcoal-dark);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    z-index: 1000;
+    font-weight: 600;
+    border-radius: 0 0 8px 0;
+    transition: top 0.3s ease;
+  }
+
+  .skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--sage-green);
+    outline-offset: 2px;
+  }
+
+  /* Enhanced focus states for accessibility */
+  a:focus-visible,
+  button:focus-visible {
+    outline: 3px solid var(--sage-green);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Remove default focus outline but keep for keyboard navigation */
+  a:focus:not(:focus-visible),
+  button:focus:not(:focus-visible) {
+    outline: none;
   }
 
   .site-header {
@@ -277,6 +337,24 @@ const socialImage = image ? new URL(image, Astro.site) : new URL(`${import.meta.
     opacity: 1;
   }
 
+  .search-toggle {
+    background: none;
+    border: none;
+    color: var(--shadow-subtle);
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+  }
+
+  .search-toggle:hover {
+    color: var(--charcoal-dark);
+    background: rgba(90, 107, 93, 0.1);
+  }
+
   main {
     min-height: calc(100vh - 200px);
     padding: 0;
@@ -285,7 +363,7 @@ const socialImage = image ? new URL(image, Astro.site) : new URL(`${import.meta.
   .site-footer {
     background: linear-gradient(135deg, var(--cream-warm) 0%, var(--warm-light) 100%);
     border-top: 1px solid rgba(90, 107, 93, 0.2);
-    padding: 3rem 0;
+    padding: 3rem 0 2rem;
     margin-top: 6rem;
   }
 
@@ -297,6 +375,56 @@ const socialImage = image ? new URL(image, Astro.site) : new URL(`${import.meta.
     color: var(--shadow-subtle);
     font-size: 0.9rem;
     font-weight: 400;
+  }
+
+  .footer-nav {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(90, 107, 93, 0.15);
+  }
+
+  .footer-nav a {
+    text-decoration: none;
+    color: var(--steel-blue);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.25s ease;
+    position: relative;
+  }
+
+  .footer-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--sage-green);
+    transition: all 0.25s ease;
+    transform: translateX(-50%);
+  }
+
+  .footer-nav a:hover {
+    color: var(--charcoal-dark);
+  }
+
+  .footer-nav a:hover::after {
+    width: 100%;
+  }
+
+  .footer-copyright {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--charcoal-dark);
+  }
+
+  .footer-tagline {
+    font-style: italic;
+    color: var(--text-secondary);
+    margin: 0;
   }
 
   /* Enhanced Typography */
@@ -329,7 +457,6 @@ const socialImage = image ? new URL(image, Astro.site) : new URL(`${import.meta.
     }
 
     .nav-links {
-      display: none;
       position: absolute;
       top: 100%;
       left: 0;
@@ -343,10 +470,17 @@ const socialImage = image ? new URL(image, Astro.site) : new URL(`${import.meta.
       padding: 1rem 0;
       margin-top: 1rem;
       z-index: 99;
+      opacity: 0;
+      transform: translateY(-10px);
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
     .nav-links.mobile-open {
       display: flex;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
     }
 
     .nav-links a {
@@ -375,6 +509,16 @@ const socialImage = image ? new URL(image, Astro.site) : new URL(`${import.meta.
 
     .logo p {
       font-size: 0.8rem;
+    }
+
+    .footer-nav {
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .footer-nav a::after {
+      display: none;
     }
   }
 </style>

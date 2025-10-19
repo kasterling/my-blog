@@ -1,10 +1,10 @@
 ---
-title: "A Modern Archetype: The Two Beasts and the Islamic State"
+title: "Part 6: The Digital Womb - The Two Beasts and the Islamic State"
 pubDate: "2025-10-08"
 description: "An analysis of the Islamic State as a modern, small-scale archetype of the two-beast system described in Revelation, combining political and religious power."
 author: "Keith Sterling"
 tags: ["theology", "archetype", "beast system", "eschatology"]
-image: "/my-blog/images/blog-header.png"
+image: "/my-blog/images/matrix_fetus.png"
 ---
 
 ## Introduction

@@ -1,5 +1,5 @@
 ---
-title: "The Quiet Blueprint: China's Social Credit as Beast System Archetype"
+title: "Part 7: The Digital Womb - China's Social Credit as Beast System Archetype"
 pubDate: "2025-10-09"
 description: "An analysis of China's Social Credit System as a modern archetype of the two-beast system, a quiet blueprint that fuses state power with technological control."
 author: "Keith Sterling"

@@ -1,5 +1,5 @@
 ---
-title: "The Digital Womb: An Introduction to a Technological Thesis"
+title: "Part 1: The Digital Womb - An Introduction to a Technological Thesis"
 pubDate: "2025-10-07"
 description: "An introductory post outlining the thesis that the progression of Internet -> Blockchain -> AI may be creating the technological framework for the prophesied Beast system."
 author: "Keith Sterling"

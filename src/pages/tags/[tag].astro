@@ -1,0 +1,329 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+
+  // Extract all unique tags
+  const uniqueTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))];
+
+  return uniqueTags.map(tag => ({
+    params: { tag },
+    props: {
+      posts: allPosts
+        .filter(post => post.data.tags?.includes(tag))
+        .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
+    }
+  }));
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const baseUrl = base.endsWith('/') ? base.slice(0, -1) : base;
+---
+
+<Layout
+  title={`Posts tagged: ${tag}`}
+  description={`All posts exploring ${tag} on The Sterling Perspective`}
+>
+  <div class="tag-archive">
+    <header class="archive-header">
+      <h1>#{tag}</h1>
+      <p class="tag-count">{posts.length} {posts.length === 1 ? 'post' : 'posts'} exploring this theme</p>
+    </header>
+
+    <div class="posts-grid">
+      {posts.map(post => (
+        <article class="post-card">
+          {post.data.image && (
+            <div class="post-card-image">
+              <img
+                src={post.data.image}
+                alt={post.data.title}
+                loading="lazy"
+                decoding="async"
+                width="600"
+                height="340"
+              />
+            </div>
+          )}
+          <div class="post-card-content">
+            <div class="post-meta">
+              {post.data.mood && (
+                <span class="mood-badge">{post.data.mood}</span>
+              )}
+              <time>{new Date(post.data.pubDate).toLocaleDateString()}</time>
+            </div>
+            <h3><a href={`${baseUrl}/blog/${post.slug}`}>{post.data.title}</a></h3>
+            <p>{post.data.description}</p>
+            {post.data.perspective && (
+              <div class="perspective-preview">
+                <span>Exploring: {post.data.perspective}</span>
+              </div>
+            )}
+            {post.data.tags && post.data.tags.length > 1 && (
+              <div class="tags">
+                {post.data.tags.filter(t => t !== tag).slice(0, 3).map(t => (
+                  <a href={`${baseUrl}/tags/${t}`} class="tag">#{t}</a>
+                ))}
+              </div>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="back-link">
+      <a href={`${baseUrl}/`} class="btn-back">← Back to all perspectives</a>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .tag-archive {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .archive-header {
+    text-align: center;
+    padding: 3rem 0 4rem;
+    background: linear-gradient(135deg, var(--fog-white) 0%, var(--warm-light) 50%, var(--cream-warm) 100%);
+    margin: 0 -2rem 3rem;
+    position: relative;
+  }
+
+  .archive-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--sage-green), var(--steel-blue));
+    border-radius: 2px;
+  }
+
+  .archive-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--charcoal-dark);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .tag-count {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .post-card {
+    background: rgba(254, 254, 254, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(90, 107, 93, 0.15);
+    border-radius: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(45, 45, 45, 0.06);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .post-card-image {
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+    border-radius: 16px 16px 0 0;
+    margin: 0;
+    position: relative;
+  }
+
+  .post-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    aspect-ratio: 16/9;
+    transition: transform 0.4s ease;
+  }
+
+  .post-card:hover .post-card-image img {
+    transform: scale(1.05);
+  }
+
+  .post-card-content {
+    padding: 2.5rem;
+  }
+
+  .post-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--sage-green) 0%, var(--steel-blue) 100%);
+    border-radius: 16px 16px 0 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .post-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 16px 48px rgba(45, 45, 45, 0.15);
+  }
+
+  .post-card:hover::before {
+    opacity: 1;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .mood-badge {
+    background: linear-gradient(135deg, var(--sage-green) 0%, var(--sage-muted) 100%);
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: 0.02em;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  }
+
+  .post-card time {
+    color: var(--text-secondary);
+  }
+
+  .post-card h3 {
+    margin-bottom: 1rem;
+  }
+
+  .post-card h3 a {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .post-card h3 a:hover {
+    color: var(--link-hover);
+  }
+
+  .post-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .perspective-preview {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, var(--cream-warm) 0%, var(--mist-light) 100%);
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-style: italic;
+    color: var(--steel-blue);
+    border-left: 3px solid var(--sage-green);
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    background: var(--mist-light);
+    color: var(--steel-blue);
+    padding: 0.25rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid rgba(90, 107, 93, 0.1);
+    text-decoration: none;
+    transition: all 0.25s ease;
+  }
+
+  .tag:hover {
+    background: linear-gradient(135deg, var(--sage-green), var(--steel-blue));
+    color: white;
+    border-color: transparent;
+  }
+
+  .back-link {
+    text-align: center;
+    padding: 2rem 0;
+  }
+
+  .btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    background: linear-gradient(135deg, var(--sage-green) 0%, var(--steel-blue) 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(90, 107, 93, 0.25);
+  }
+
+  .btn-back:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(90, 107, 93, 0.35);
+  }
+
+  @media (max-width: 768px) {
+    .tag-archive {
+      padding: 1rem;
+    }
+
+    .archive-header {
+      padding: 2rem 1rem 3rem;
+      margin: 0 -1rem 2rem;
+    }
+
+    .archive-header h1 {
+      font-size: 2.5rem;
+    }
+
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .post-meta {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      padding: 0.65rem 1.1rem;
+      font-size: 0.875rem;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+    }
+  }
+</style>

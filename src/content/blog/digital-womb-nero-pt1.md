@@ -1,5 +1,5 @@
 ---
-title: "Nero as the Antichrist Archetype"
+title: "Part 2: The Digital Womb - Nero as the Antichrist Archetype"
 pubDate: "2025-10-07"
 description: "An exploration of how the Roman Emperor Nero serves as a historical archetype for the prophesied end-times Antichrist."
 author: "Keith Sterling"

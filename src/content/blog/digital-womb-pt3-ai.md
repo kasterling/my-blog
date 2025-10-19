@@ -1,5 +1,5 @@
 ---
-title: "The Digital Embryo: AI and the Breath of Life"
+title: "Part 4: The Digital Womb - AI and the Breath of Life"
 pubDate: "2025-10-07"
 description: "Exploring the role of Artificial Intelligence as the 'embryo' in the 'digital womb' thesis, potentially giving 'life' to a global control system."
 author: "Keith Sterling"
